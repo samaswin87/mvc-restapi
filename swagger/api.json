@@ -1,0 +1,206 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "User Test API",
+    "description" : "This is a User Test API",
+    "contact" : {
+      "email" : "aswin@mycompany.com"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "https://virtserver.swaggerhub.com/samaswin87/User/1.0.0",
+    "description" : "User Test API"
+  } ],
+  "tags" : [ {
+    "name" : "users",
+    "description" : "Operations available for users"
+  } ],
+  "paths" : {
+    "/users" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "list all users",
+        "description" : "List all users",
+        "operationId" : "listUsers",
+        "responses" : {
+          "200" : {
+            "description" : "list users",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "add user",
+        "description" : "Add a User",
+        "operationId" : "addUser",
+        "requestBody" : {
+          "description" : "User to add",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/User"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "user updated"
+          },
+          "400" : {
+            "description" : "Invalid Input (JSON format, Column type, Data already exist)"
+          }
+        }
+      }
+    },
+    "/user/{id}" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "get user",
+        "description" : "get a User",
+        "operationId" : "getUser",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "user found"
+          },
+          "400" : {
+            "description" : "Invalid Input (JSON format, Column type, Data already exist)"
+          },
+          "404" : {
+            "description" : "Record Not Exist"
+          },
+          "500" : {
+            "description" : "Unexpected Error"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "users" ],
+        "summary" : "update user",
+        "description" : "update a User",
+        "operationId" : "updateUser",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "User to update",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/User"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "user updated"
+          },
+          "400" : {
+            "description" : "Invalid Input (JSON format, Column type, Data already exist)"
+          },
+          "404" : {
+            "description" : "Record Not Exist"
+          },
+          "500" : {
+            "description" : "Unexpected Error"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "users" ],
+        "summary" : "delete user",
+        "description" : "delete a User",
+        "operationId" : "deleteUser",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "user deleted"
+          },
+          "400" : {
+            "description" : "Invalid Input (JSON format, Column type, Data already exist)"
+          },
+          "404" : {
+            "description" : "Record Not Exist"
+          },
+          "500" : {
+            "description" : "Unexpected Error"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "User" : {
+        "required" : [ "email", "name", "password" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "name" : {
+            "type" : "string",
+            "example" : "Aswin"
+          },
+          "password" : {
+            "type" : "string",
+            "format" : "password",
+            "example" : "password"
+          },
+          "email" : {
+            "type" : "string",
+            "format" : "email",
+            "example" : "email@company.com"
+          }
+        }
+      }
+    }
+  }
+}
